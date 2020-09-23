@@ -12,6 +12,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Expence Manager',
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        accentColor: Colors.amber,
+        // fontFamily: '',
+      ),
       home: MyHomePage(),
     );
   }
@@ -24,18 +29,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-      id: 't1',
-      title: 'Keyboard',
-      amount: 45.15,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Bag',
-      amount: 15.35,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Keyboard',
+    //   amount: 45.15,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Bag',
+    //   amount: 15.35,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   void _addTx(String txTitle, double txAmount) {
@@ -67,13 +72,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            'Expense Manager',
+        title: Text(
+          'Expense Manager',
+          style: TextStyle(
+            color: Theme.of(context).accentColor,
+            fontFamily: 'PressStart2P',
+            fontSize: 16.0,
           ),
         ),
         actions: [
           IconButton(
+            color: Theme.of(context).accentColor,
             icon: Icon(Icons.add),
             onPressed: () => _startNewTransaction(context),
           )
