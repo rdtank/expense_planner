@@ -5,13 +5,14 @@ import '../Models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> userTransaction;
+  final Function deleteTx;
 
-  TransactionList(this.userTransaction);
+  TransactionList(this.userTransaction, this.deleteTx);
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 300,
+      height: 380,
       child: userTransaction.isEmpty
           ? Column(
               children: [
@@ -43,34 +44,36 @@ class TransactionList extends StatelessWidget {
                 return Card(
                   elevation: 5.0,
                   margin: EdgeInsets.symmetric(vertical: 7.0, horizontal: 5.0),
-                  child: Container(
-                    margin: EdgeInsets.only(left: 10.0),
-                    child: ListTile(
-                      trailing: CircleAvatar(
-                        radius: 30.0,
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: FittedBox(
-                            child: Text(
-                                '\$${userTransaction[index].amount.toStringAsFixed(2)}'),
-                          ),
+                  child: ListTile(
+                    trailing: CircleAvatar(
+                      radius: 30.0,
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: FittedBox(
+                          child: Text(
+                              '\$${userTransaction[index].amount.toStringAsFixed(2)}'),
                         ),
                       ),
-                      title: Text(
-                        userTransaction[index].title,
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColorDark,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Architects Daughter',
-                          letterSpacing: 1.5,
-                        ),
+                    ),
+                    title: Text(
+                      userTransaction[index].title,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorDark,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Architects Daughter',
+                        letterSpacing: 1.5,
                       ),
-                      subtitle: Text(
-                        DateFormat.yMMMd()
-                            .add_jm()
-                            .format(userTransaction[index].date),
-                      ),
+                    ),
+                    subtitle: Text(
+                      DateFormat.yMMMd()
+                          .add_jm()
+                          .format(userTransaction[index].date),
+                    ),
+                    leading: IconButton(
+                      color: Theme.of(context).errorColor,
+                      icon: Icon(Icons.delete),
+                      onPressed: () => deleteTx(userTransaction[index].id),
                     ),
                   ),
                 );
