@@ -41,64 +41,37 @@ class TransactionList extends StatelessWidget {
           : ListView.builder(
               itemBuilder: (ctx, index) {
                 return Card(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: 20.0,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              userTransaction[index].title,
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColorDark,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Architects Daughter',
-                                letterSpacing: 1.5,
-                              ),
-                            ),
-                            Text(
-                              DateFormat.yMMMd()
-                                  .add_jm()
-                                  .format(userTransaction[index].date),
-                              style: TextStyle(
-                                fontSize: 17.0,
-                                fontFamily: 'Cookie',
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: 20.0,
-                        ),
-                        padding: EdgeInsets.all(10.0),
-                        child: Text(
-                          '\$${userTransaction[index].amount.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w700,
-                            // fontFamily: 'Architects Daughter',
-                            // letterSpacing: 1.5,
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Theme.of(context).primaryColor,
-                            width: 2.0,
+                  elevation: 5.0,
+                  margin: EdgeInsets.symmetric(vertical: 7.0, horizontal: 5.0),
+                  child: Container(
+                    margin: EdgeInsets.only(left: 10.0),
+                    child: ListTile(
+                      trailing: CircleAvatar(
+                        radius: 30.0,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: FittedBox(
+                            child: Text(
+                                '\$${userTransaction[index].amount.toStringAsFixed(2)}'),
                           ),
                         ),
                       ),
-                    ],
+                      title: Text(
+                        userTransaction[index].title,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Architects Daughter',
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                      subtitle: Text(
+                        DateFormat.yMMMd()
+                            .add_jm()
+                            .format(userTransaction[index].date),
+                      ),
+                    ),
                   ),
                 );
               },
